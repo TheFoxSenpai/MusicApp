@@ -1,5 +1,6 @@
 package org.example.Model;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
+import java.util.Properties;
 
 
 public class DatabaseModel {
@@ -14,11 +16,18 @@ public class DatabaseModel {
 
     public DatabaseModel() {
         try {
+            Properties properties = new Properties();      properties.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+            String URL = properties.getProperty("DATABASE_URL");
+            String PASSWORD = properties.getProperty("PASSWORD");
+            String User = properties.getProperty("USERNAME");
+
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/musicdb?useSSL=false", "root", "123!@#QAZWSX");
+                    URL, User, PASSWORD);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

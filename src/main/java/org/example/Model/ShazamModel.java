@@ -9,16 +9,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
+import java.util.Properties;
 
 public class ShazamModel {
 
-    private final String API_KEY = "14efb9e98fmshd3eb533e851e428p1ffa3ajsne9f076e28c97";  // replace with your RapidAPI key
+    //private final String API_KEY = "14efb9e98fmshd3eb533e851e428p1ffa3ajsne9f076e28c97";
 
     public String recognizeSong(String songPath) throws IOException, InterruptedException {
         byte[] songData = Files.readAllBytes(Path.of(songPath));
         String base64Data = Base64.getEncoder().encodeToString(songData);
 
         HttpClient client = HttpClient.newHttpClient();
+        Properties properties = new Properties();      properties.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+        String API_KEY = properties.getProperty("API_KEY");
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://shazam.p.rapidapi.com/songs/detect"))

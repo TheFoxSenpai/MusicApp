@@ -41,7 +41,7 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
                 String songPath = view.getSelectedSongPath();
                 if (songPath != null) {
-                    // loading screen
+                    // Show the loading screen
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -85,13 +85,13 @@ public class Controller {
                                 }
 
 
-                                // Create final copies of the variables, that I will be using for transport
+                                // Create final copies of the variables
                                 final BufferedImage finalSongImage = songImage;
                                 final String finalYoutubeURL = youtubeURL;
 
                                 // Display the song information
                                 RecognizedSongView recognizedSongView = new RecognizedSongView(view.getFrame());
-
+                                RecognizedSongController recognizedSongController = new RecognizedSongController(model, recognizedSongView, songTitle, songArtist, finalSongImage, finalYoutubeURL);
 
                                 SwingUtilities.invokeLater(new Runnable() {
                                     @Override
@@ -117,13 +117,14 @@ public class Controller {
                                 SwingUtilities.invokeLater(new Runnable() {
                                     @Override
                                     public void run() {
-                                        view.hideLoadingScreen(); // Hide the loading screen
+                                        view.hideLoadingScreen(); // Always hide the loading screen
                                     }
                                 });
                             }
                         }
                     }).start();
                 } else {
+                    // Handle the case where no file was selected
                 }
             }
         });

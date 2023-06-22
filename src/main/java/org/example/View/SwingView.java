@@ -34,7 +34,6 @@ public class SwingView {
     }
 
     public SwingView() {
-
         // create main frame
         frame = new JFrame("MP3 Player");
         frame.setSize(800, 600);
@@ -46,7 +45,7 @@ public class SwingView {
         loadingDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 
         // Add the loading gif
-        URL loadingGifUrl = getClass().getResource("/Search.gif");
+        URL loadingGifUrl = getClass().getResource("/Search.gif"); // Replace /Search.gif if the gif name or location changes
         ImageIcon loadingIcon = new ImageIcon(loadingGifUrl);
         JLabel loadingLabel = new JLabel("Recognizing song...", loadingIcon, JLabel.CENTER);
 
@@ -73,7 +72,8 @@ public class SwingView {
         buttonPanel.add(deletePlaylistButton);
         buttonPanel.add(deleteSongButton);
 
-
+        // Add spacing between left and right margins of recognize song button
+        // controlPanel.add(buttonPanel, BorderLayout.CENTER);
         controlPanel.setBorder(BorderFactory.createEmptyBorder(0, 60, 0, 60)); // Adjust spacing here
 
         // add control panel to frame

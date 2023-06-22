@@ -47,6 +47,7 @@ public class RecognizedSongController {
                 view.hide();
             }
         });
+
     }
     private String showPlaylistSelectionDialog() {
         List<String> playlists = model.getAllPlaylists();
